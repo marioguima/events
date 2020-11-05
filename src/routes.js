@@ -12,8 +12,8 @@ routes.get('/webinars', (req, res) => {
     res.sendFile(publicPath + '/views/webinar/index.html')
 });
 
-routes.get('/admins', (req, res) => {
-    res.sendFile(__dirname + '/views/admin/index.html')
+routes.get('/admin', (req, res) => {
+    res.sendFile(publicPath + '/views/admin/index.html')
 });
 
 module.exports = routes;
