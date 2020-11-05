@@ -1,7 +1,10 @@
 const { Router } = require("express");
 const routes = new Router();
 const path = require("path");
-const UserController = require('./database/controllers/UserContoller');
+
+const UserController = require('./controllers/UserContoller');
+
+const authMiddleware = require('./middlewares/auth');
 
 const publicPath = path.resolve(__dirname + '/../public');
 
@@ -17,7 +20,7 @@ routes.get('/admin', (req, res) => {
     res.sendFile(publicPath + '/views/admin/index.html')
 });
 
-routes.get('/users', UserController.index)
+routes.get('/users', authMiddleware, UserController.index)
 routes.post('/users', UserController.store)
 routes.put('/users/:user_id', UserController.update)
 routes.delete('/users/:user_id', UserController.delete)

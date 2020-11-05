@@ -72,3 +72,10 @@ timeInRoom
             "underscored": true,
             "underscoredAll": true,
         }
+
+
+Gerador de hash (usei o md5)
+http://andti.com.br/tool/hash
+esse é o hash do event o melhor sistema de webinário do mundo que fala português pois foi feito no Brasil com muito orgulho
+
+65491a1744dcc5e338203375e410dfae

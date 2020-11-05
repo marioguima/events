@@ -1,7 +1,13 @@
-const { listen } = require('socket.io');
-const db = require('../models/index');
+const db = require('../database/models/index');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const authConfig = require('../config/auth.json');
 
+function generateToken(params = {}) {
+    return jwt.sign(params, authConfig.secret, {
+        expiresIn: 78300,
+    });
+}
 module.exports = {
     async login(req, res) {
         const { email, password, islogged } = req.body;
@@ -38,10 +44,13 @@ module.exports = {
 
         user.password = undefined;
 
+        const token = generateToken({ id: user.id });
+
         return res.status(200).send({
             status: 1,
             message: 'usuário logado com sucesso!',
-            user
+            user,
+            token
         });
     },
 
@@ -67,10 +76,13 @@ module.exports = {
 
         const user = await db.User.create({ name, email, password });
 
+        const token = generateToken({ id: user.id });
+
         return res.status(200).send({
             status: 1,
             message: 'usuário cadastrado com sucesso',
-            user
+            user,
+            token
         });
 
     },
